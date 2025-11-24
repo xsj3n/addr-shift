@@ -1,0 +1,1 @@
+ip="$(curl ifconfig.me)"
