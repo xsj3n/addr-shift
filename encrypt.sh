@@ -1,0 +1,5 @@
+user="$(cat ./recipient.txt)"
+gpg --encrypt --recipient "$user" --yes --trust-model always --output "./api.key.gpg" "./api.key" 
+gpg --encrypt --recipient "$user" --yes --trust-model always --output "./recipient.txt.gpg" "./recipient.txt"
+rm "./api.key"
+rm "./recipient.txt"
