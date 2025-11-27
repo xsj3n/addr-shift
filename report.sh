@@ -10,8 +10,9 @@ last_ip="$(cat ${ip_enc_file:0:-4})"
 echo "$ip" > "${ip_enc_file:0:-4}"
 gpg --encrypt --recipient-file "./recipient.asc" --yes --trust-model always --output "$ip_enc_file" "${ip_enc_file:0:-4}"
 
-helper="!echo 'username=$(cat ./user.txt)'; echo 'password=$(cat api.key)'";
+user=$(cat ./user.txt)
+helper="!echo 'username=$user'; echo 'password=$(cat api.key)'";
 git add "$ip_enc_file"
-git commit -m "sync"
-git -c credential.helper="$helper" push 
+git commit -m "sync" --author="$user $(cat ./author.txt)"
+git -c credential.helper="$helper" push --force
 rm "$ip_enc_file"

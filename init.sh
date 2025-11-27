@@ -4,6 +4,7 @@ ip="$1"
 recipient="$2"
 git_user="$3"
 api_key_path="$4"
+author="$5"
 
 # we need to make the srv account and opt dir 
 ssh "root@$ip" << 'EOF'
@@ -19,7 +20,10 @@ gpg --armor --export "$recipient" > ./recipient.asc
 scp ./recipient.asc "root@$ip:/opt/ipsync/addr-shift"
 scp "$api_key_path" "root@$ip:/opt/ipsync/addr-shift/api.key"
 ssh "root@$ip" "echo '$git_user' > /opt/ipsync/addr-shift/user.txt"
+ssh "root@$ip" "echo '$author' > /opt/ipsync/addr-shift/author.txt"
 ssh "root@$ip" "chmod -R 700 /opt/ipsync"
+rm "./recipient.asc"
 
 # cronjob to run once a day 
-ssh "root@$ip" '(crontab -u ipsync -l 2>/dev/null; echo "0 0 * * * /opt/ipsync/addr-shift/report.sh") | crontab -u ipsync -'
+ssh "root@$ip" 'echo "0 0 * * * /opt/ipsync/addr-shift/report.sh" | crontab -u ipsync -'
+ssh "root@$ip" '/opt/ipsync/addr-shift/report.sh'
