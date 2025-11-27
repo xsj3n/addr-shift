@@ -1,5 +1,6 @@
 set -euo pipefail
 
+cd /opt/ipsync/addr-shift 
 ip_enc_file="./ip.txt.gpg"
 [[ -f "${ip_enc_file:0:-4}" ]] || touch "${ip_enc_file:0:-4}"
 
