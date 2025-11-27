@@ -18,9 +18,9 @@ helper="!echo 'username=$user'; echo 'password=$(cat api.key)'";
 
 git add "$ip_enc_file"
 GIT_AUTHOR_NAME="$user" \
-GIT_COMMITER_NAME="$user" \
+GIT_COMMITTER_NAME="$user" \
 GIT_AUTHOR_EMAIL="$email" \
-GIT_COMMITER_EMAIL="$email" \
+GIT_COMMITTER_NAME="$user" \
 git commit -m "sync"
 git -c credential.helper="$helper" push --force
 rm "$ip_enc_file"
