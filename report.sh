@@ -8,11 +8,13 @@ last_ip="$(cat ${ip_enc_file:0:-4})"
 
 [[ "$last_ip" == "$ip" ]] && exit 0
 echo "$ip" > "${ip_enc_file:0:-4}"
-gpg --encrypt --recipient-file "./recipient.asc" --yes --trust-model always --output "$ip_enc_file" "${ip_enc_file:0:-4}"
+gpg --homedir "./" --encrypt --recipient-file "./recipient.asc" --yes --trust-model always --output "$ip_enc_file" "${ip_enc_file:0:-4}" 
 
 user=$(cat ./user.txt)
 email=$(cat ./email.txt)
 helper="!echo 'username=$user'; echo 'password=$(cat api.key)'";
+
+
 
 git add "$ip_enc_file"
 GIT_AUTHOR_NAME="$user" \
