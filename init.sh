@@ -21,7 +21,7 @@ scp "$api_key_path" "root@$ip:/opt/ipsync/addr-shift/api.key"
 ssh "root@$ip" "echo '$git_user' > /opt/ipsync/addr-shift/user.txt"
 ssh "root@$ip" "echo '$email' > /opt/ipsync/addr-shift/email.txt"
 ssh "root@$ip" "chmod -R 700 /opt/ipsync"
-ssh "root@$ip" "chown ipsync /opt/ipsync"
+ssh "root@$ip" "chown ipsync /opt/ipsync -R"
 rm "./recipient.asc"
 
 # cronjob to run once a day 
