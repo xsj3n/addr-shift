@@ -13,7 +13,7 @@ gpg --homedir "./" --encrypt --recipient-file "./recipient.asc" --yes --trust-mo
 
 user=$(cat ./user.txt)
 email=$(cat ./email.txt)
-helper="!echo 'username=$user'; echo 'password=$(cat api.key)'";
+helper="!echo username=$user; echo password=$(cat api.key)";
 
 
 
